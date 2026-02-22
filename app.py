@@ -17,7 +17,7 @@ def send_config(command):
     url = f"http://{DVR_IP}/cgi-bin/configManager.cgi?action=setConfig&{command}"
     return requests.get(url, auth=HTTPDigestAuth(DVR_USER, DVR_PASS))
 
-def aplicar_24h(enable=True):
+def aplicar_24h():
     for ch in CHANNELS:
         base = f"MotionDetect[{ch}]"
 
@@ -84,6 +84,11 @@ def detectar_modo():
 
     return "24h"
 
+
+# ================================
+# ROTAS
+# ================================
+
 @app.route("/")
 def index():
     modo = detectar_modo()
@@ -92,7 +97,6 @@ def index():
 @app.route("/desativar")
 def desativar():
     desativar_total()
-    aplicar_24h(enable=False)
     return redirect(url_for("index"))
 
 @app.route("/madrugada")
@@ -102,7 +106,7 @@ def madrugada():
 
 @app.route("/ativar24h")
 def ativar24h():
-    aplicar_24h(enable=True)
+    aplicar_24h()
     return redirect(url_for("index"))
 
 @app.route("/health")
