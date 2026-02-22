@@ -21,13 +21,13 @@ def aplicar_24h():
     for ch in CHANNELS:
         base = f"MotionDetect[{ch}]"
 
-        send_config(f"{base}.Enable=enable")
+        send_config(f"{base}.Enable=true")
         send_config(f"{base}.EventHandler.MailEnable=true")
         send_config(f"{base}.EventHandler.BeepEnable=true")
 
         for day in range(8):
             for slot in range(6):
-                send_config(f"{base}.EventHandler.TimeSection[{day}][{slot}]=0 00:00:00-24:00:00")
+                send_config(f"{base}.EventHandler.TimeSection[{day}][0]=1 00:00:00-24:00:00")
 
 def desativar_total():
     for ch in CHANNELS:
@@ -49,6 +49,8 @@ def aplicar_madrugada():
 
         # Ativa recurso
         send_config(f"{base}.Enable=true")
+        send_config(f"{base}.EventHandler.MailEnable=true")
+        send_config(f"{base}.EventHandler.BeepEnable=true")
 
         # Segunda a Domingo
         for day in range(6):
