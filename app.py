@@ -24,6 +24,10 @@ def configurar_canal(channel, enable, email, buzzer):
     send_config(f"{base}.EventHandler.EmailEnable={str(email).lower()}")
     send_config(f"{base}.EventHandler.BuzzerEnable={str(buzzer).lower()}")
 
+    for day in range(8):
+            for slot in range(6):
+                send_config(f"{base}.EventHandler.TimeSection[{day}][{slot}]=0 00:00:00-24:00:00")
+
 def aplicar_24h(enable=True):
     for ch in CHANNELS:
         configurar_canal(ch, enable, enable, enable)
