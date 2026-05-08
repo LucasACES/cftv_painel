@@ -53,7 +53,7 @@ def aplicar_madrugada():
         send_config(f"{base}.EventHandler.BeepEnable=true")
 
         # Segunda a Domingo
-        for day in range(6):
+        for day in range(8):
             send_config(f"{base}.EventHandler.TimeSection[{day}][0]=1 22:00:00-23:59:59")
             send_config(f"{base}.EventHandler.TimeSection[{day}][1]=1 00:00:00-06:30:00")
             # send_config(f"{base}.Schedule[{ch}][{day}].StartTime=00:00")
